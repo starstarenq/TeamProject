@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerInputControls : MonoBehaviour
@@ -21,5 +22,14 @@ public class PlayerInputControls : MonoBehaviour
 
         animator.SetFloat("InputX", movedir.x);
         animator.SetFloat("InputY", movedir.y);
+    }
+
+    [SerializeField] UnityEvent triggered;
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            triggered?.Invoke();
+        }
     }
 }
